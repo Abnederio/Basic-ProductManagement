@@ -15,7 +15,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Optional<Product> getByIdProduct(@PathVariable Long id){
         return productService.findById(id);
     }
@@ -23,6 +23,16 @@ public class ProductController {
     @GetMapping
     public List <Product> findAllProducts(){
         return productService.findAllProducts();
+    }
+
+    @GetMapping("/place/{p}")
+    public List <Product> findProductByPlace(@PathVariable("p") String place){
+        return productService.findProductByPlace(place);
+    }
+
+    @GetMapping("/text/{text}")
+    public List <Product> findProductByText(@PathVariable String text){
+        return productService.findProductByText(text);
     }
 
     @PostMapping
