@@ -22,12 +22,16 @@ public class ProductService {
         return  productRepository.findById(id);
     }
 
-    public List<Product> findProductByPlace(String place){
-        return productRepository.findProductByPlace(place);
+    public List<Product> findProductByPlaceContainingIgnoreCase(String place){
+        return productRepository.findProductByPlaceContainingIgnoreCase(place);
+    }
+
+    public List<Product> findProductByName(String name){
+        return productRepository.findProductByNameContainingIgnoreCase(name);
     }
 
     public List<Product> findProductByText(String text){
-        return productRepository.findProductByNameContainingIgnoreCase(text);
+        return productRepository.findByNameContainingIgnoreCaseOrPlaceContainingIgnoreCaseOrTypeContainingIgnoreCase(text,text,text);
     }
 
     public List<Product> addProduct(List<Product> product){
@@ -38,6 +42,10 @@ public class ProductService {
             }
         }
         return productRepository.saveAll(product);
+    }
+
+    public Product updateProduct(Product product){
+        return productRepository.save(product);
     }
 
 

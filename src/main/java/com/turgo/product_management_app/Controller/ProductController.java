@@ -1,5 +1,4 @@
 package com.turgo.product_management_app.Controller;
-
 import com.turgo.product_management_app.Model.Product;
 import com.turgo.product_management_app.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,13 @@ public class ProductController {
     }
 
     @GetMapping("/place/{p}")
-    public List <Product> findProductByPlace(@PathVariable("p") String place){
-        return productService.findProductByPlace(place);
+    public List <Product> findProductByPlaceContainingIgnoreCase(@PathVariable("p") String place){
+        return productService.findProductByPlaceContainingIgnoreCase(place);
+    }
+
+    @GetMapping("/name/{name}")
+    public List <Product> findProductByName(@PathVariable String name){
+        return productService.findProductByName(name);
     }
 
     @GetMapping("/text/{text}")
@@ -40,4 +44,8 @@ public class ProductController {
         return productService.addProduct(products);
     }
 
+    @PostMapping("/update")
+    public Product updateProduct(@RequestBody Product product){
+        return productService.updateProduct(product);
+    }
 }
